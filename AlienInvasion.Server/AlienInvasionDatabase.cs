@@ -45,7 +45,7 @@ namespace AlienInvasion.Server
 		public IList<AlienInvasionUser> GetAlienInvasionUsers()
 		{
 			const string commandText = @"
-				select * from AlienInvasionUser
+				select * from alienInvasionUser
 				";
 
 			return readObjectsFromQuery(commandText, reader => new AlienInvasionUser

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace AlienInvasion.Server.Database
 {
 	public abstract class BaseDatabase: IDisposable
 	{
 		[ThreadStatic]
-		protected static SqlConnection _connection;
+		protected static MySqlConnection _connection;
 
 		[ThreadStatic]
 		private static int _connectionLevel;
@@ -17,7 +17,7 @@ namespace AlienInvasion.Server.Database
 		{
 			if (_connectionLevel == 0)
 			{
-				_connection = new SqlConnection(AppConfig.AlienInvasionDatabaseConnectionString);
+                _connection = new MySqlConnection(AppConfig.AlienInvasionDatabaseConnectionString);
 				_connection.Open();
 			}
 			_connectionLevel++;
@@ -35,7 +35,7 @@ namespace AlienInvasion.Server.Database
 
 		protected static object executeScalarSql(string sql, IEnumerable<Parameter> parameters = null)
 		{
-			using (SqlCommand cmd = new SqlCommand(sql, _connection))
+			using (var cmd = new MySqlCommand(sql, _connection))
 			{
 				cmd.CommandType = CommandType.Text;
 
@@ -48,7 +48,7 @@ namespace AlienInvasion.Server.Database
 
 		protected static void executeNonQuery(string sql, IEnumerable<Parameter> parameters)
 		{
-			using (SqlCommand cmd = new SqlCommand(sql, _connection))
+            using (var cmd = new MySqlCommand(sql, _connection))
 			{
 				addParametersToCommand(parameters, cmd);
 				cmd.CommandType = CommandType.Text;
@@ -63,7 +63,7 @@ namespace AlienInvasion.Server.Database
 
 		protected static IList<T> readObjectsFromQuery<T>(string queryText, IEnumerable<Parameter> parameters, Func<IDataReader, T> mappingFunction)
 		{
-			using (var cmd = new SqlCommand(queryText, _connection))
+            using (var cmd = new MySqlCommand(queryText, _connection))
 			{
 				addParametersToCommand(parameters, cmd);
 				cmd.CommandType = CommandType.Text;
@@ -86,9 +86,9 @@ namespace AlienInvasion.Server.Database
 			return mapResult;
 		}
 
-		private static void addParametersToCommand(IEnumerable<Parameter> parameters, SqlCommand cmd)
+        private static void addParametersToCommand(IEnumerable<Parameter> parameters, MySqlCommand cmd)
 		{
-			foreach (Parameter param in parameters)
+			foreach (var param in parameters)
 			{
 				if (param.Value is DateTime)
 				{
