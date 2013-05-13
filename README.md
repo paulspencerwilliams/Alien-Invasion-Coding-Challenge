@@ -1,3 +1,8 @@
+Alien-Invasion-Coding-Challenge
+===============================
+
+A coding game designed to measure the effectiveness of TDD and Continuous Testing.  Designed for conferences and studies.
+
 This codebase should contain all the code you need to run the alien invasion coding challenge.
 
 The solution itself contains all the server and client components required across the infrastructure.
