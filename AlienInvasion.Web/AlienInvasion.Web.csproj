@@ -14,6 +14,7 @@
     <AssemblyName>AlienInvasion.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -135,6 +136,6 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(ProjectDir)..\References\*.* $(ProjectDir)\bin /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(ProjectDir)..\References\*.*" "$(ProjectDir)\bin" /Y</PostBuildEvent>
   </PropertyGroup>
 </Project>
