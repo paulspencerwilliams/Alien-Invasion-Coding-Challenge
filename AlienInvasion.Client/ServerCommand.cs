@@ -11,7 +11,7 @@ namespace AlienInvasion.Client
 			var webAction = new WebAction();
 			var encryption = new SymmetricEncryption("blahblah");
 			var encryptedUserName = encryption.Encrypt(userNames);
-			byte[] currentCity = webAction.HttpPostForm("http://localhost:21822/alieninvasion/SignOnToDefendEarth", new Dictionary<string, string> { { "userName", encryptedUserName } });
+            byte[] currentCity = webAction.HttpPostForm("http://aliens.agilestaffordshire.org/alieninvasion/SignOnToDefendEarth", new Dictionary<string, string> { { "userName", encryptedUserName } });
 
 			if (currentCity == null)
 			{
@@ -31,7 +31,7 @@ namespace AlienInvasion.Client
 			var webAction = new WebAction();
 			var encryption = new SymmetricEncryption("blahblah" + failedToDefend);
 			var encryptedUserName = encryption.Encrypt(userNames);
-			byte[] currentCity = webAction.HttpPostForm("http://localhost:21822/alieninvasion/ReportInvasionResultAndGetNextCity", new Dictionary<string, string> { { "userName", encryptedUserName }, { "failedToDefend", failedToDefend.ToString() } });
+            byte[] currentCity = webAction.HttpPostForm("http://aliens.agilestaffordshire.org/alieninvasion/ReportInvasionResultAndGetNextCity", new Dictionary<string, string> { { "userName", encryptedUserName }, { "failedToDefend", failedToDefend.ToString() } });
 
 			if (currentCity.Length != 4)
 			{
