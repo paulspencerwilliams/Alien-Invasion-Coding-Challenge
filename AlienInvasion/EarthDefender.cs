@@ -12,9 +12,10 @@ namespace AlienInvasion
 
 		public DefenceStrategy DefendEarth(IAlienInvasionWave invasionWave)
 		{
-		    return new DefenceStrategy(invasionWave.WeaponsAvailableForDefence.Take(invasionWave.AlienInvaders.Count()));
+		    IEnumerable<IDefenceWeapon> weaponsToUse;
+            weaponsToUse = invasionWave.WeaponsAvailableForDefence.Take(1);
+            //weaponsToUse = invasionWave.WeaponsAvailableForDefence.Take(invasionWave.AlienInvaders.Count());
+		    return new DefenceStrategy(weaponsToUse);
 		}
-
-
 	}
 }
